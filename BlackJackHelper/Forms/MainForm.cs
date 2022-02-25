@@ -26,91 +26,177 @@ namespace BlackJackHelper.Forms
             _playerHand = new Hand();
             _playerEngine = new PlayerEngine();
 
-            BindDropdowns();
+            BindSuits();
         }
 
-        private void BindDropdowns()
+        private void BindSuits()
         {
-            BindSuitDropdowns();
-            BindFaceDropdowns();
+            ucDealerSuitClubs.SetProperties(this, true);
+            ucPlayerSuitClubs.SetProperties(this, false);
         }
 
-        private void BindSuitDropdowns()
+        public void AddCard(Card card, bool isDealer)
         {
-            var suits = Enum.GetNames(typeof(Logic.Enums.Suit));
-
-            for (int i = 0; i < suits.Length; i++)
+            if (isDealer)
             {
-                cmbDealerSuit.Items.Add(suits[i].ToString());
-                cmbPlayerSuit.Items.Add(suits[i].ToString());
+                _dealerHand.AddCard(card);
+                lstDealerHand.Items.Add(card.Name);
             }
-        }
-
-        private void BindFaceDropdowns()
-        {
-            var faces = Enum.GetNames(typeof(Logic.Enums.Face));
-
-            for (int i = 0; i < faces.Length; i++)
+            else
             {
-                cmbDealerFace.Items.Add(faces[i].ToString());
-                cmbPlayerFace.Items.Add(faces[i].ToString());
+                _playerHand.AddCard(card);
+                lstPlayerHand.Items.Add(card.Name);
+                lblPlayerValue.Text = _playerHand.Value.ToString();
             }
-        }
 
-        private void btnAddDealerCard_Click(object sender, EventArgs e)
-        {
-            var card = new Card()
+            if (_dealerHand.Cards.Count > 0)
             {
-                Face = (Face)cmbDealerFace.SelectedIndex,
-                Suit = (Suit)cmbDealerSuit.SelectedIndex,
-            };
-            _dealerHand.AddCard(card);
-            lstDealerHand.Items.Add(card.Name);
-
-            lblDealerValue.Text = _dealerHand.Value.ToString();
+                WhatDo();
+            }
         }
 
         private void btnNewHand_Click(object sender, EventArgs e)
         {
+            NewHand();
+        }
+
+        private void NewHand()
+        {
             _dealerHand = new Hand();
             _playerHand = new Hand();
 
-            lblDealerValue.Text = "";
             lstDealerHand.Items.Clear();
-            cmbDealerFace.SelectedIndex = -1;
-            cmbDealerSuit.SelectedIndex = -1;
 
             lblPlayerValue.Text = "";
             lstPlayerHand.Items.Clear();
-            cmbPlayerFace.SelectedIndex = -1;
-            cmbPlayerSuit.SelectedIndex = -1;
 
             lblWhatDo.Text = "";
         }
 
-        private void btnAddPlayerCard_Click(object sender, EventArgs e)
+        private void WhatDo()
         {
-            var card = new Card()
-            {
-                Face = (Face)cmbPlayerFace.SelectedIndex,
-                Suit = (Suit)cmbPlayerSuit.SelectedIndex
-            };
-            _playerHand.AddCard(card);
-            lstPlayerHand.Items.Add(card.Name);
+            var shouldHit = _playerEngine.WhatDo(_playerHand, _dealerHand);
 
-            lblPlayerValue.Text = _playerHand.Value.ToString();
+            switch (shouldHit)
+            {
+                case ResultAction.Hit:
+                    lblWhatDo.Text = "You should hit";
+                    break;
+                case ResultAction.Stand:
+                    lblWhatDo.Text = "You should stand";
+                    break;
+                case ResultAction.Double:
+                    lblWhatDo.Text = "You should double";
+                    break;
+                case ResultAction.Split:
+                    lblWhatDo.Text = "You should split";
+                    break;
+                case ResultAction.Bust:
+                    lblWhatDo.Text = "You are bust";
+                    break;
+                case ResultAction.DoubleOrStand:
+                    lblWhatDo.Text = "You should double if you can, stand otherwise.";
+                    break;
+                case ResultAction.DoubleOrHit:
+                    lblWhatDo.Text = "You should double if you can, hit otherwise.";
+                    break;
+                case ResultAction.Incalculable:
+                    lblWhatDo.Text = "This is impossible.";
+                    break;
+            }
         }
 
-        private void btnWhatDo_Click(object sender, EventArgs e)
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            var shouldHit = _playerEngine.ShouldHit(_playerHand, _dealerHand);
+            var key = e.KeyCode;
 
-            if (shouldHit)
+            var card = new Card();
+
+            switch (key)
             {
-                lblWhatDo.Text = "Hit";
-            } else
-            {
-                lblWhatDo.Text = "Stick";
+                case Keys.NumPad0:
+                    card.Face = Face.Ten;
+                    AddCard(card, false);
+                    break;
+                case Keys.NumPad1:
+                    card.Face = Face.Ace;
+                    AddCard(card, false);
+                    break;
+                case Keys.NumPad2:
+                    card.Face = Face.Two;
+                    AddCard(card, false);
+                    break;
+                case Keys.NumPad3:
+                    card.Face = Face.Three;
+                    AddCard(card, false);
+                    break;
+                case Keys.NumPad4:
+                    card.Face = Face.Four;
+                    AddCard(card, false);
+                    break;
+                case Keys.NumPad5:
+                    card.Face = Face.Five;
+                    AddCard(card, false);
+                    break;
+                case Keys.NumPad6:
+                    card.Face = Face.Six;
+                    AddCard(card, false);
+                    break;
+                case Keys.NumPad7:
+                    card.Face = Face.Seven;
+                    AddCard(card, false);
+                    break;
+                case Keys.NumPad8:
+                    card.Face = Face.Eight;
+                    AddCard(card, false);
+                    break;
+                case Keys.NumPad9:
+                    card.Face = Face.Nine;
+                    AddCard(card, false);
+                    break;
+                case Keys.D0:
+                    card.Face = Face.Ten;
+                    AddCard(card, true);
+                    break;
+                case Keys.D1:
+                    card.Face = Face.Ace;
+                    AddCard(card, true);
+                    break;
+                case Keys.D2:
+                    card.Face = Face.Two;
+                    AddCard(card, true);
+                    break;
+                case Keys.D3:
+                    card.Face = Face.Three;
+                    AddCard(card, true);
+                    break;
+                case Keys.D4:
+                    card.Face = Face.Four;
+                    AddCard(card, true);
+                    break;
+                case Keys.D5:
+                    card.Face = Face.Five;
+                    AddCard(card, true);
+                    break;
+                case Keys.D6:
+                    card.Face = Face.Six;
+                    AddCard(card, true);
+                    break;
+                case Keys.D7:
+                    card.Face = Face.Seven;
+                    AddCard(card, true);
+                    break;
+                case Keys.D8:
+                    card.Face = Face.Eight;
+                    AddCard(card, true);
+                    break;
+                case Keys.D9:
+                    card.Face = Face.Nine;
+                    AddCard(card, true);
+                    break;
+                case Keys.Back:
+                    NewHand();
+                    break;
             }
         }
     }
