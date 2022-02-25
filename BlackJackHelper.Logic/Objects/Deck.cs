@@ -10,23 +10,24 @@ namespace BlackJackHelper.Logic.Objects
         {
             Cards = new List<Card>();
 
-            for (int i = 0; i < 4; i++)
+            foreach (int i in Enum.GetValues(typeof(Suit)))
             {
                 foreach (int j in Enum.GetValues(typeof(Face)))
                 {
                     Cards.Add(new Card()
                     {
-                        Face = (Face)j
+                        Face = (Face)j,
+                        Suit = (Suit)i
                     });
                 }
             }
         }
 
-        public void RemoveFromDeck(Face face)
+        public void RemoveFromDeck(Face face, Suit suit)
         {
             foreach (Card card in Cards)
             {
-                if (card.Face == face)
+                if (card.Face == face && card.Suit == suit)
                 {
                     Cards.Remove(card);
                     break;
