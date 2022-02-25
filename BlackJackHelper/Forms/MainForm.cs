@@ -31,15 +31,8 @@ namespace BlackJackHelper.Forms
 
         private void BindSuits()
         {
-            ucDealerSuitClubs.SetProperties(Suit.Clubs, this, true);
-            ucDealerSuitDiamonds.SetProperties(Suit.Diamonds, this, true);
-            ucDealerSuitHearts.SetProperties(Suit.Hearts, this, true);
-            ucDealerSuitSpades.SetProperties(Suit.Spades, this, true);
-
-            ucPlayerSuitClubs.SetProperties(Suit.Clubs, this, false);
-            ucPlayerSuitDiamonds.SetProperties(Suit.Diamonds, this, false);
-            ucPlayerSuitHearts.SetProperties(Suit.Hearts, this, false);
-            ucPlayerSuitSpades.SetProperties(Suit.Spades, this, false);
+            ucDealerSuitClubs.SetProperties(this, true);
+            ucPlayerSuitClubs.SetProperties(this, false);
         }
 
         public void AddCard(Card card, bool isDealer)
@@ -117,10 +110,7 @@ namespace BlackJackHelper.Forms
         {
             var key = e.KeyCode;
 
-            var card = new Card()
-            {
-                Suit = Suit.Clubs
-            };
+            var card = new Card();
 
             switch (key)
             {
