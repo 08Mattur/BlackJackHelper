@@ -1,15 +1,6 @@
 ﻿using BlackJackHelper.Logic.Engines;
 using BlackJackHelper.Logic.Enums;
 using BlackJackHelper.Logic.Objects;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BlackJackHelper.Forms
 {
@@ -18,6 +9,7 @@ namespace BlackJackHelper.Forms
         private Hand _dealerHand { get; set; }
         private Hand _playerHand { get; set; }
         private PlayerEngine _playerEngine { get; set; }
+        private double _playerAdvantage { get; set; }
 
         public MainForm()
         {
@@ -25,6 +17,7 @@ namespace BlackJackHelper.Forms
             _dealerHand = new Hand();
             _playerHand = new Hand();
             _playerEngine = new PlayerEngine();
+            _playerAdvantage = 0;
 
             BindSuits();
         }
@@ -37,6 +30,8 @@ namespace BlackJackHelper.Forms
 
         public void AddCard(Card card, bool isDealer)
         {
+            UpdateCounter(card.Face);
+
             if (isDealer)
             {
                 _dealerHand.AddCard(card);
@@ -55,6 +50,39 @@ namespace BlackJackHelper.Forms
             }
         }
 
+        private void UpdateCounter(Face face)
+        {
+            switch (face)
+            {
+                case Face.Two:
+                    _playerAdvantage -= 1;
+                    break;
+                case Face.Three:
+                    _playerAdvantage -= 1;
+                    break;
+                case Face.Four:
+                    _playerAdvantage -= 1;
+                    break;
+                case Face.Five:
+                    _playerAdvantage -= 1;
+                    break;
+                case Face.Six:
+                    _playerAdvantage -= 1;
+                    break;
+                case Face.Seven:
+                    break;
+                case Face.Eight:
+                    break;
+                case Face.Nine:
+                    break;
+                default:
+                    _playerAdvantage += 1;
+                    break;
+            }
+                       
+            lblAdvantageValue.Text = Math.Round((_playerAdvantage/6),3).ToString();
+        }
+
         private void btnNewHand_Click(object sender, EventArgs e)
         {
             NewHand();
@@ -71,6 +99,7 @@ namespace BlackJackHelper.Forms
             lstPlayerHand.Items.Clear();
 
             lblWhatDo.Text = "";
+            lblWhatDo.ForeColor = Color.Black;
         }
 
         private void WhatDo()
@@ -80,30 +109,44 @@ namespace BlackJackHelper.Forms
             switch (shouldHit)
             {
                 case ResultAction.Hit:
-                    lblWhatDo.Text = "You should hit";
+                    lblWhatDo.Text = "Hit";
+                    lblWhatDo.ForeColor = Color.Red;
                     break;
                 case ResultAction.Stand:
                     lblWhatDo.Text = "You should stand";
+                    lblWhatDo.ForeColor = Color.Orange;
                     break;
                 case ResultAction.Double:
                     lblWhatDo.Text = "You should double";
+                    lblWhatDo.ForeColor = Color.Blue;
                     break;
                 case ResultAction.Split:
                     lblWhatDo.Text = "You should split";
+                    lblWhatDo.ForeColor = Color.Pink;
                     break;
                 case ResultAction.Bust:
                     lblWhatDo.Text = "You are bust";
+                    lblWhatDo.ForeColor = Color.Black;
                     break;
                 case ResultAction.DoubleOrStand:
                     lblWhatDo.Text = "You should double if you can, stand otherwise.";
+                    lblWhatDo.ForeColor = Color.BlueViolet;
                     break;
                 case ResultAction.DoubleOrHit:
                     lblWhatDo.Text = "You should double if you can, hit otherwise.";
+                    lblWhatDo.ForeColor = Color.Purple;
                     break;
                 case ResultAction.Incalculable:
                     lblWhatDo.Text = "This is impossible.";
                     break;
             }
+        }
+
+        private void NewDeck()
+        {
+            _playerAdvantage = 0;
+            lblAdvantageValue.Text = _playerAdvantage.ToString();
+            NewHand();
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -197,7 +240,15 @@ namespace BlackJackHelper.Forms
                 case Keys.Back:
                     NewHand();
                     break;
+                case Keys.F12:
+                    NewDeck();
+                    break;
             }
+        }
+
+        private void btnNewDeck_Click(object sender, EventArgs e)
+        {
+            NewDeck();
         }
     }
 }

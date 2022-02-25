@@ -59,6 +59,8 @@ namespace BlackJackHelper.Logic.Engines
         {
             switch (_playerHandValue)
             {
+                case >= 21:
+                    return ResultAction.Bust;
                 case >= 17:
                     return ResultAction.Stand;
                 case >= 13:

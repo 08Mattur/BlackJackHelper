@@ -34,27 +34,30 @@
             this.ucDealerSuitClubs = new BlackJackHelper.Controls.Suit();
             this.lstDealerHand = new System.Windows.Forms.ListBox();
             this.gbPlayer = new System.Windows.Forms.GroupBox();
-            this.lblWhatDo = new System.Windows.Forms.Label();
+            this.lblAdvantageValue = new System.Windows.Forms.Label();
+            this.lblAdvantageText = new System.Windows.Forms.Label();
             this.ucPlayerSuitClubs = new BlackJackHelper.Controls.Suit();
             this.lstPlayerHand = new System.Windows.Forms.ListBox();
             this.lblPlayerValue = new System.Windows.Forms.Label();
             this.lblPlayerValueText = new System.Windows.Forms.Label();
+            this.lblWhatDo = new System.Windows.Forms.Label();
             this.gbDealer.SuspendLayout();
             this.gbPlayer.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnNewDeck
             // 
-            this.btnNewDeck.Location = new System.Drawing.Point(12, 473);
+            this.btnNewDeck.Location = new System.Drawing.Point(12, 250);
             this.btnNewDeck.Name = "btnNewDeck";
             this.btnNewDeck.Size = new System.Drawing.Size(75, 23);
             this.btnNewDeck.TabIndex = 0;
             this.btnNewDeck.Text = "New Deck";
             this.btnNewDeck.UseVisualStyleBackColor = true;
+            this.btnNewDeck.Click += new System.EventHandler(this.btnNewDeck_Click);
             // 
             // btnNewHand
             // 
-            this.btnNewHand.Location = new System.Drawing.Point(843, 473);
+            this.btnNewHand.Location = new System.Drawing.Point(843, 250);
             this.btnNewHand.Name = "btnNewHand";
             this.btnNewHand.Size = new System.Drawing.Size(75, 23);
             this.btnNewHand.TabIndex = 1;
@@ -91,25 +94,36 @@
             // 
             // gbPlayer
             // 
-            this.gbPlayer.Controls.Add(this.lblWhatDo);
+            this.gbPlayer.Controls.Add(this.lblAdvantageValue);
+            this.gbPlayer.Controls.Add(this.lblAdvantageText);
             this.gbPlayer.Controls.Add(this.ucPlayerSuitClubs);
             this.gbPlayer.Controls.Add(this.lstPlayerHand);
             this.gbPlayer.Controls.Add(this.lblPlayerValue);
             this.gbPlayer.Controls.Add(this.lblPlayerValueText);
-            this.gbPlayer.Location = new System.Drawing.Point(12, 228);
+            this.gbPlayer.Location = new System.Drawing.Point(12, 115);
             this.gbPlayer.Name = "gbPlayer";
-            this.gbPlayer.Size = new System.Drawing.Size(906, 201);
+            this.gbPlayer.Size = new System.Drawing.Size(906, 129);
             this.gbPlayer.TabIndex = 8;
             this.gbPlayer.TabStop = false;
             this.gbPlayer.Text = "Player";
             // 
-            // lblWhatDo
+            // lblAdvantageValue
             // 
-            this.lblWhatDo.AutoSize = true;
-            this.lblWhatDo.Location = new System.Drawing.Point(612, 155);
-            this.lblWhatDo.Name = "lblWhatDo";
-            this.lblWhatDo.Size = new System.Drawing.Size(0, 15);
-            this.lblWhatDo.TabIndex = 9;
+            this.lblAdvantageValue.AutoSize = true;
+            this.lblAdvantageValue.Location = new System.Drawing.Point(125, 89);
+            this.lblAdvantageValue.Name = "lblAdvantageValue";
+            this.lblAdvantageValue.Size = new System.Drawing.Size(13, 15);
+            this.lblAdvantageValue.TabIndex = 15;
+            this.lblAdvantageValue.Text = "0";
+            // 
+            // lblAdvantageText
+            // 
+            this.lblAdvantageText.AutoSize = true;
+            this.lblAdvantageText.Location = new System.Drawing.Point(6, 89);
+            this.lblAdvantageText.Name = "lblAdvantageText";
+            this.lblAdvantageText.Size = new System.Drawing.Size(99, 15);
+            this.lblAdvantageText.TabIndex = 14;
+            this.lblAdvantageText.Text = "Player Advantage";
             // 
             // ucPlayerSuitClubs
             // 
@@ -124,13 +138,13 @@
             this.lstPlayerHand.ItemHeight = 15;
             this.lstPlayerHand.Location = new System.Drawing.Point(612, 19);
             this.lstPlayerHand.Name = "lstPlayerHand";
-            this.lstPlayerHand.Size = new System.Drawing.Size(288, 109);
+            this.lstPlayerHand.Size = new System.Drawing.Size(288, 94);
             this.lstPlayerHand.TabIndex = 6;
             // 
             // lblPlayerValue
             // 
             this.lblPlayerValue.AutoSize = true;
-            this.lblPlayerValue.Location = new System.Drawing.Point(709, 131);
+            this.lblPlayerValue.Location = new System.Drawing.Point(125, 65);
             this.lblPlayerValue.Name = "lblPlayerValue";
             this.lblPlayerValue.Size = new System.Drawing.Size(0, 15);
             this.lblPlayerValue.TabIndex = 5;
@@ -138,17 +152,27 @@
             // lblPlayerValueText
             // 
             this.lblPlayerValueText.AutoSize = true;
-            this.lblPlayerValueText.Location = new System.Drawing.Point(612, 131);
+            this.lblPlayerValueText.Location = new System.Drawing.Point(6, 65);
             this.lblPlayerValueText.Name = "lblPlayerValueText";
             this.lblPlayerValueText.Size = new System.Drawing.Size(70, 15);
             this.lblPlayerValueText.TabIndex = 4;
             this.lblPlayerValueText.Text = "Player Value";
             // 
+            // lblWhatDo
+            // 
+            this.lblWhatDo.AutoSize = true;
+            this.lblWhatDo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblWhatDo.Location = new System.Drawing.Point(291, 250);
+            this.lblWhatDo.Name = "lblWhatDo";
+            this.lblWhatDo.Size = new System.Drawing.Size(0, 25);
+            this.lblWhatDo.TabIndex = 9;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 503);
+            this.ClientSize = new System.Drawing.Size(930, 280);
+            this.Controls.Add(this.lblWhatDo);
             this.Controls.Add(this.gbPlayer);
             this.Controls.Add(this.gbDealer);
             this.Controls.Add(this.btnNewHand);
@@ -161,6 +185,7 @@
             this.gbPlayer.ResumeLayout(false);
             this.gbPlayer.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -174,8 +199,10 @@
         private ListBox lstPlayerHand;
         private Label lblPlayerValue;
         private Label lblPlayerValueText;
-        private Label lblWhatDo;
         private Controls.Suit ucDealerSuitClubs;
         private Controls.Suit ucPlayerSuitClubs;
+        private Label lblAdvantageText;
+        private Label lblAdvantageValue;
+        private Label lblWhatDo;
     }
 }
