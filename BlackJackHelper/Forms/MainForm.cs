@@ -26,48 +26,35 @@ namespace BlackJackHelper.Forms
             _playerHand = new Hand();
             _playerEngine = new PlayerEngine();
 
-            BindDropdowns();
+            BindSuits();
         }
 
-        private void BindDropdowns()
+        private void BindSuits()
         {
-            BindSuitDropdowns();
-            BindFaceDropdowns();
+            ucDealerSuitClubs.SetProperties(Suit.Clubs, this, true);
+            ucDealerSuitDiamonds.SetProperties(Suit.Diamonds, this, true);
+            ucDealerSuitHearts.SetProperties(Suit.Hearts, this, true);
+            ucDealerSuitSpades.SetProperties(Suit.Spades, this, true);
+
+            ucPlayerSuitClubs.SetProperties(Suit.Clubs, this, false);
+            ucPlayerSuitDiamonds.SetProperties(Suit.Diamonds, this, false);
+            ucPlayerSuitHearts.SetProperties(Suit.Hearts, this, false);
+            ucPlayerSuitSpades.SetProperties(Suit.Spades, this, false);
         }
 
-        private void BindSuitDropdowns()
+        public void AddCard(Card card, bool isDealer)
         {
-            var suits = Enum.GetNames(typeof(Logic.Enums.Suit));
-
-            for (int i = 0; i < suits.Length; i++)
+            if (isDealer)
             {
-                cmbDealerSuit.Items.Add(suits[i].ToString());
-                cmbPlayerSuit.Items.Add(suits[i].ToString());
+                _dealerHand.AddCard(card);
+                lstDealerHand.Items.Add(card.Name);
+            } 
+            else
+            {
+                _playerHand.AddCard(card);
+                lstPlayerHand.Items.Add(card.Name);
+                lblPlayerValue.Text = _playerHand.Value.ToString();
             }
-        }
-
-        private void BindFaceDropdowns()
-        {
-            var faces = Enum.GetNames(typeof(Logic.Enums.Face));
-
-            for (int i = 0; i < faces.Length; i++)
-            {
-                cmbDealerFace.Items.Add(faces[i].ToString());
-                cmbPlayerFace.Items.Add(faces[i].ToString());
-            }
-        }
-
-        private void btnAddDealerCard_Click(object sender, EventArgs e)
-        {
-            var card = new Card()
-            {
-                Face = (Face)cmbDealerFace.SelectedIndex,
-                Suit = (Suit)cmbDealerSuit.SelectedIndex,
-            };
-            _dealerHand.AddCard(card);
-            lstDealerHand.Items.Add(card.Name);
-
-            lblDealerValue.Text = _dealerHand.Value.ToString();
         }
 
         private void btnNewHand_Click(object sender, EventArgs e)
@@ -75,30 +62,12 @@ namespace BlackJackHelper.Forms
             _dealerHand = new Hand();
             _playerHand = new Hand();
 
-            lblDealerValue.Text = "";
             lstDealerHand.Items.Clear();
-            cmbDealerFace.SelectedIndex = -1;
-            cmbDealerSuit.SelectedIndex = -1;
 
             lblPlayerValue.Text = "";
             lstPlayerHand.Items.Clear();
-            cmbPlayerFace.SelectedIndex = -1;
-            cmbPlayerSuit.SelectedIndex = -1;
 
             lblWhatDo.Text = "";
-        }
-
-        private void btnAddPlayerCard_Click(object sender, EventArgs e)
-        {
-            var card = new Card()
-            {
-                Face = (Face)cmbPlayerFace.SelectedIndex,
-                Suit = (Suit)cmbPlayerSuit.SelectedIndex
-            };
-            _playerHand.AddCard(card);
-            lstPlayerHand.Items.Add(card.Name);
-
-            lblPlayerValue.Text = _playerHand.Value.ToString();
         }
 
         private void btnWhatDo_Click(object sender, EventArgs e)
