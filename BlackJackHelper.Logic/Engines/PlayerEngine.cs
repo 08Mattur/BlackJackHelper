@@ -1,56 +1,98 @@
-﻿using BlackJackHelper.Logic.Objects;
+﻿using BlackJackHelper.Logic.Engines.PlayerActions.Hards;
+using BlackJackHelper.Logic.Engines.PlayerActions.Softs;
+using BlackJackHelper.Logic.Engines.PlayerActions.Splits;
+using BlackJackHelper.Logic.Enums;
+using BlackJackHelper.Logic.Objects;
 
 namespace BlackJackHelper.Logic.Engines
 {
     public class PlayerEngine
     {
         private int _playerHandValue = 0;
-        private int _dealerHandValue = 0;
 
-        public bool ShouldHit(Hand playerHand, Hand dealerHand)
+        private Face _dealerFace;
+
+        public ResultAction WhatDo(Hand playerHand, Hand dealerHand)
         {
             _playerHandValue = playerHand.Value;
-            _dealerHandValue = dealerHand.Value;
+            _dealerFace = dealerHand.Cards[0].Face;
+
+            if (playerHand.IsPair)
+            {
+                var firstCard = playerHand.Cards[0];
+                return WhatDoIfPair(firstCard);
+            }
 
             if (playerHand.IsSoft)
             {
-                return ShouldHitWhenSoft();
+                return WhatDoIfSoftValue();
             }
 
-            if(_dealerHandValue < 7)
-            {
-                return ShouldHitWhenDealerLow();
-            }
-
-            return ShouldHitWhenDealerHigh();
+            return WhatDoIfHardValue();
         }
 
-        private bool ShouldHitWhenSoft()
+        private ResultAction WhatDoIfPair(Card firstCard)
         {
-            if (_playerHandValue >= 19)
+            switch (firstCard.Face)
             {
-                return false;
+                case Face.Two:
+                    return TwoAndThreeSplits.WhatDo(_dealerFace);
+                case Face.Three:
+                    return TwoAndThreeSplits.WhatDo(_dealerFace);
+                case Face.Four:
+                    return ResultAction.Hit;
+                case Face.Six:
+                    return SixSplits.WhatDo(_dealerFace);
+                case Face.Seven:
+                    return SevenSplits.WhatDo(_dealerFace);
+                case Face.Eight:
+                    return ResultAction.Split;
+                case Face.Nine:
+                    return NineSplits.WhatDo(_dealerFace);
+                case Face.Ace:
+                    return ResultAction.Split;
+                default:
+                    return WhatDoIfHardValue();
             }
-
-            return true;
         }
-
-        private bool ShouldHitWhenDealerLow()
+        private ResultAction WhatDoIfHardValue()
         {
-            if (_playerHandValue >= 12)
+            switch (_playerHandValue)
             {
-                return false;
+                case >= 17:
+                    return ResultAction.Stand;
+                case >= 13:
+                    return PlayerHighHard.WhatDo(_dealerFace);
+                case 12:
+                    return TwelveHard.WhatDo(_dealerFace);
+                case 11:
+                    return ResultAction.DoubleOrHit;
+                case 10:
+                    return TenHard.WhatDo(_dealerFace);
+                case 9:
+                    return NineHard.WhatDo(_dealerFace);
+                default:
+                    return ResultAction.Hit;
             }
-            return true;
         }
-
-        private bool ShouldHitWhenDealerHigh()
+        private ResultAction WhatDoIfSoftValue()
         {
-            if (_playerHandValue >= 17)
+            switch (_playerHandValue)
             {
-                return false;
+                case >= 20:
+                    return ResultAction.Stand;
+                case 19:
+                    return NineteenSoft.WhatDo(_dealerFace);
+                case 18:
+                    return EighteenSoft.WhatDo(_dealerFace);
+                case 17:
+                    return SeventeenSoft.WhatDo(_dealerFace);
+                case >= 15:
+                    return FifteenAndSixteenSoft.WhatDo(_dealerFace);
+                case >= 13:
+                    return ThirteenAndFourteenSoft.WhatDo(_dealerFace);
+                default: return ResultAction.Incalculable;
             }
-            return true;
         }
     }
 }

@@ -85,6 +85,21 @@ namespace BlackJackHelper.Logic.Objects
             }
         }
 
+        public bool IsPair
+        {
+            get
+            {
+                if (Cards.Count == 2)
+                {
+                    if (Cards[0].Face == Cards[1].Face)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
         public void AddCard(Card card)
         {
             Cards.Add(card);
