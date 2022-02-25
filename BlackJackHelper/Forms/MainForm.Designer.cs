@@ -31,16 +31,10 @@
             this.btnNewDeck = new System.Windows.Forms.Button();
             this.btnNewHand = new System.Windows.Forms.Button();
             this.gbDealer = new System.Windows.Forms.GroupBox();
-            this.ucDealerSuitSpades = new BlackJackHelper.Controls.Suit();
-            this.ucDealerSuitHearts = new BlackJackHelper.Controls.Suit();
-            this.ucDealerSuitDiamonds = new BlackJackHelper.Controls.Suit();
             this.ucDealerSuitClubs = new BlackJackHelper.Controls.Suit();
             this.lstDealerHand = new System.Windows.Forms.ListBox();
             this.gbPlayer = new System.Windows.Forms.GroupBox();
             this.lblWhatDo = new System.Windows.Forms.Label();
-            this.ucPlayerSuitSpades = new BlackJackHelper.Controls.Suit();
-            this.ucPlayerSuitHearts = new BlackJackHelper.Controls.Suit();
-            this.ucPlayerSuitDiamonds = new BlackJackHelper.Controls.Suit();
             this.ucPlayerSuitClubs = new BlackJackHelper.Controls.Suit();
             this.lstPlayerHand = new System.Windows.Forms.ListBox();
             this.lblPlayerValue = new System.Windows.Forms.Label();
@@ -70,38 +64,14 @@
             // 
             // gbDealer
             // 
-            this.gbDealer.Controls.Add(this.ucDealerSuitSpades);
-            this.gbDealer.Controls.Add(this.ucDealerSuitHearts);
-            this.gbDealer.Controls.Add(this.ucDealerSuitDiamonds);
             this.gbDealer.Controls.Add(this.ucDealerSuitClubs);
             this.gbDealer.Controls.Add(this.lstDealerHand);
             this.gbDealer.Location = new System.Drawing.Point(12, 12);
             this.gbDealer.Name = "gbDealer";
-            this.gbDealer.Size = new System.Drawing.Size(906, 210);
+            this.gbDealer.Size = new System.Drawing.Size(906, 97);
             this.gbDealer.TabIndex = 7;
             this.gbDealer.TabStop = false;
             this.gbDealer.Text = "Dealer";
-            // 
-            // ucDealerSuitSpades
-            // 
-            this.ucDealerSuitSpades.Location = new System.Drawing.Point(6, 160);
-            this.ucDealerSuitSpades.Name = "ucDealerSuitSpades";
-            this.ucDealerSuitSpades.Size = new System.Drawing.Size(600, 40);
-            this.ucDealerSuitSpades.TabIndex = 12;
-            // 
-            // ucDealerSuitHearts
-            // 
-            this.ucDealerSuitHearts.Location = new System.Drawing.Point(6, 114);
-            this.ucDealerSuitHearts.Name = "ucDealerSuitHearts";
-            this.ucDealerSuitHearts.Size = new System.Drawing.Size(600, 40);
-            this.ucDealerSuitHearts.TabIndex = 11;
-            // 
-            // ucDealerSuitDiamonds
-            // 
-            this.ucDealerSuitDiamonds.Location = new System.Drawing.Point(6, 68);
-            this.ucDealerSuitDiamonds.Name = "ucDealerSuitDiamonds";
-            this.ucDealerSuitDiamonds.Size = new System.Drawing.Size(600, 40);
-            this.ucDealerSuitDiamonds.TabIndex = 10;
             // 
             // ucDealerSuitClubs
             // 
@@ -116,15 +86,12 @@
             this.lstDealerHand.ItemHeight = 15;
             this.lstDealerHand.Location = new System.Drawing.Point(612, 22);
             this.lstDealerHand.Name = "lstDealerHand";
-            this.lstDealerHand.Size = new System.Drawing.Size(288, 109);
+            this.lstDealerHand.Size = new System.Drawing.Size(288, 64);
             this.lstDealerHand.TabIndex = 8;
             // 
             // gbPlayer
             // 
             this.gbPlayer.Controls.Add(this.lblWhatDo);
-            this.gbPlayer.Controls.Add(this.ucPlayerSuitSpades);
-            this.gbPlayer.Controls.Add(this.ucPlayerSuitHearts);
-            this.gbPlayer.Controls.Add(this.ucPlayerSuitDiamonds);
             this.gbPlayer.Controls.Add(this.ucPlayerSuitClubs);
             this.gbPlayer.Controls.Add(this.lstPlayerHand);
             this.gbPlayer.Controls.Add(this.lblPlayerValue);
@@ -143,27 +110,6 @@
             this.lblWhatDo.Name = "lblWhatDo";
             this.lblWhatDo.Size = new System.Drawing.Size(0, 15);
             this.lblWhatDo.TabIndex = 9;
-            // 
-            // ucPlayerSuitSpades
-            // 
-            this.ucPlayerSuitSpades.Location = new System.Drawing.Point(6, 155);
-            this.ucPlayerSuitSpades.Name = "ucPlayerSuitSpades";
-            this.ucPlayerSuitSpades.Size = new System.Drawing.Size(600, 40);
-            this.ucPlayerSuitSpades.TabIndex = 16;
-            // 
-            // ucPlayerSuitHearts
-            // 
-            this.ucPlayerSuitHearts.Location = new System.Drawing.Point(6, 114);
-            this.ucPlayerSuitHearts.Name = "ucPlayerSuitHearts";
-            this.ucPlayerSuitHearts.Size = new System.Drawing.Size(600, 40);
-            this.ucPlayerSuitHearts.TabIndex = 15;
-            // 
-            // ucPlayerSuitDiamonds
-            // 
-            this.ucPlayerSuitDiamonds.Location = new System.Drawing.Point(6, 68);
-            this.ucPlayerSuitDiamonds.Name = "ucPlayerSuitDiamonds";
-            this.ucPlayerSuitDiamonds.Size = new System.Drawing.Size(600, 40);
-            this.ucPlayerSuitDiamonds.TabIndex = 14;
             // 
             // ucPlayerSuitClubs
             // 
@@ -229,13 +175,7 @@
         private Label lblPlayerValue;
         private Label lblPlayerValueText;
         private Label lblWhatDo;
-        private Controls.Suit ucDealerSuitSpades;
-        private Controls.Suit ucDealerSuitHearts;
-        private Controls.Suit ucDealerSuitDiamonds;
         private Controls.Suit ucDealerSuitClubs;
-        private Controls.Suit ucPlayerSuitSpades;
-        private Controls.Suit ucPlayerSuitHearts;
-        private Controls.Suit ucPlayerSuitDiamonds;
         private Controls.Suit ucPlayerSuitClubs;
     }
 }
