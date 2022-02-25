@@ -1,6 +1,7 @@
 ﻿using BlackJackHelper.Logic.Engines;
 using BlackJackHelper.Logic.Enums;
 using BlackJackHelper.Logic.Objects;
+using BlackJackHelper.Logic.Services;
 
 namespace BlackJackHelper.Forms
 {
@@ -10,6 +11,7 @@ namespace BlackJackHelper.Forms
         private Hand _playerHand { get; set; }
         private PlayerEngine _playerEngine { get; set; }
         private double _playerAdvantage { get; set; }
+        private Deck _deck { get; set; }
 
         public MainForm()
         {
@@ -18,7 +20,7 @@ namespace BlackJackHelper.Forms
             _playerHand = new Hand();
             _playerEngine = new PlayerEngine();
             _playerAdvantage = 0;
-
+            _deck = DeckBuilderService.BuildNewDeck(8);
             BindSuits();
         }
 
@@ -31,6 +33,8 @@ namespace BlackJackHelper.Forms
         public void AddCard(Card card, bool isDealer)
         {
             UpdateCounter(card.Face);
+            _deck.RemoveFromDeck(card.Face);
+            CalculateCardsLeft();
 
             if (isDealer)
             {
@@ -55,19 +59,19 @@ namespace BlackJackHelper.Forms
             switch (face)
             {
                 case Face.Two:
-                    _playerAdvantage -= 1;
+                    _playerAdvantage += 1;
                     break;
                 case Face.Three:
-                    _playerAdvantage -= 1;
+                    _playerAdvantage += 1;
                     break;
                 case Face.Four:
-                    _playerAdvantage -= 1;
+                    _playerAdvantage += 1;
                     break;
                 case Face.Five:
-                    _playerAdvantage -= 1;
+                    _playerAdvantage += 1;
                     break;
                 case Face.Six:
-                    _playerAdvantage -= 1;
+                    _playerAdvantage += 1;
                     break;
                 case Face.Seven:
                     break;
@@ -76,11 +80,11 @@ namespace BlackJackHelper.Forms
                 case Face.Nine:
                     break;
                 default:
-                    _playerAdvantage += 1;
+                    _playerAdvantage -= 1;
                     break;
             }
                        
-            lblAdvantageValue.Text = Math.Round((_playerAdvantage/6),3).ToString();
+            lblAdvantageValue.Text = Math.Round((_playerAdvantage/8),3).ToString();
         }
 
         private void btnNewHand_Click(object sender, EventArgs e)
@@ -144,11 +148,52 @@ namespace BlackJackHelper.Forms
 
         private void NewDeck()
         {
+            _deck = DeckBuilderService.BuildNewDeck(8);
             _playerAdvantage = 0;
             lblAdvantageValue.Text = _playerAdvantage.ToString();
             NewHand();
+            CalculateCardsLeft();
         }
 
+        private void CalculateCardsLeft()
+        {
+            var totalCount = (float)_deck.Cards.Count();
+            lblTotalInDeckValue.Text = totalCount.ToString();
+
+            var acesCount = _deck.GetCountInDeck(Face.Ace);
+            var twosCount = _deck.GetCountInDeck(Face.Two);
+            var threesCount= _deck.GetCountInDeck(Face.Three);
+            var foursCount = _deck.GetCountInDeck(Face.Four);
+            var fivesCount = _deck.GetCountInDeck(Face.Five);
+            var sixesCount = _deck.GetCountInDeck(Face.Six);
+            var sevensCount = _deck.GetCountInDeck(Face.Seven);
+            var eightsCount = _deck.GetCountInDeck(Face.Eight);
+            var ninesCount = _deck.GetCountInDeck(Face.Nine);
+            var tensCount = _deck.GetCountInDeck(Face.Ten);
+
+            lblAInDeck.Text = acesCount.ToString();
+            lbl2InDeck.Text = twosCount.ToString();
+            lbl3InDeck.Text = threesCount.ToString();
+            lbl4InDeck.Text = foursCount.ToString();
+            lbl5InDeck.Text = fivesCount.ToString();
+            lbl6InDeck.Text = sixesCount.ToString();
+            lbl7InDeck.Text = sevensCount.ToString();
+            lbl8InDeck.Text = eightsCount.ToString();
+            lbl9InDeck.Text = ninesCount.ToString();
+            lbl10InDeck.Text = tensCount.ToString();
+
+            lblAProbability.Text = $"{Math.Round(acesCount / totalCount * 100,2)}%";
+            lbl2Probability.Text = $"{Math.Round(twosCount / totalCount * 100, 2)}%";
+            lbl3Probability.Text = $"{Math.Round(threesCount / totalCount * 100, 2)}%";
+            lbl4Probability.Text = $"{Math.Round(foursCount / totalCount * 100, 2)}%";
+            lbl5Probability.Text = $"{Math.Round(fivesCount / totalCount * 100, 2)}%";
+            lbl6Probability.Text = $"{Math.Round(sixesCount / totalCount * 100, 2)}%";
+            lbl7Probability.Text = $"{Math.Round(sevensCount / totalCount * 100, 2)}%";
+            lbl8Probability.Text = $"{Math.Round(eightsCount / totalCount * 100, 2)}%";
+            lbl9Probability.Text = $"{Math.Round(ninesCount / totalCount * 100, 2)}%";
+            lbl10Probability.Text = $"{Math.Round(tensCount / totalCount * 100,2)}%";
+        }
+        
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             var key = e.KeyCode;
