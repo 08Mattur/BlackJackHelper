@@ -4,18 +4,21 @@ namespace BlackJackHelper.Logic.Objects
 {
     public class Deck
     {
-        public List<Card> Cards { get; set; }
-
+        private int _decks;
+        
         public Deck()
         {
             Cards = new List<Card>();
+            PlayerAdvantage = 0;
         }
 
         public Deck(int deckCount)
         {
             Cards = new List<Card>();
+            PlayerAdvantage = 0;
+            _decks = deckCount;
 
-            for (int i = 0; i < deckCount; i++)
+            for (int i = 0; i < _decks; i++)
             {
                 foreach (int j in Enum.GetValues(typeof(Face)))
                 {
@@ -30,6 +33,17 @@ namespace BlackJackHelper.Logic.Objects
                     }
                 }
             }            
+        }
+
+        public List<Card> Cards { get; set; }
+
+        public int PlayerAdvantage { get; set; }
+
+        public double TotalAdvantage { 
+            get
+            {
+                return Math.Round(PlayerAdvantage / (double)_decks, 2);
+            } 
         }
 
         public int GetCountInDeck(Face face)
@@ -49,7 +63,20 @@ namespace BlackJackHelper.Logic.Objects
             }
             return counter;
         }
-        
+
+        public void RemoveFromDeck(Face face)
+        {
+            foreach (Card card in Cards)
+            {
+                if (card.Face == face)
+                {
+                    Cards.Remove(card);
+                    break;
+                }
+            }
+            UpdateCounter(face);
+        }
+
         private int GetTensInDeck()
         {
             var counter = 0;
@@ -65,16 +92,34 @@ namespace BlackJackHelper.Logic.Objects
             }
             return counter;
         }
-
-        public void RemoveFromDeck(Face face)
+        private void UpdateCounter(Face face)
         {
-            foreach (Card card in Cards)
+            switch (face)
             {
-                if (card.Face == face)
-                {
-                    Cards.Remove(card);
+                case Face.Two:
+                    PlayerAdvantage += 1;
                     break;
-                }
+                case Face.Three:
+                    PlayerAdvantage += 1;
+                    break;
+                case Face.Four:
+                    PlayerAdvantage += 1;
+                    break;
+                case Face.Five:
+                    PlayerAdvantage += 1;
+                    break;
+                case Face.Six:
+                    PlayerAdvantage += 1;
+                    break;
+                case Face.Seven:
+                    break;
+                case Face.Eight:
+                    break;
+                case Face.Nine:
+                    break;
+                default:
+                    PlayerAdvantage -= 1;
+                    break;
             }
         }
     }

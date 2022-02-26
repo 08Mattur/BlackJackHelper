@@ -83,11 +83,7 @@
 
         private void AddCard(Logic.Enums.Face face)
         {
-            var card = new Logic.Objects.Card()
-            {
-                Face = face
-            };
-            _mainForm.AddCard(card, _isDealer);
+            _mainForm.AddCard(face, _isDealer);
         }
     }
 }

@@ -100,8 +100,12 @@ namespace BlackJackHelper.Logic.Objects
             }
         }
 
-        public void AddCard(Card card)
+        public void AddCard(Face face)
         {
+            var card = new Card()
+            {
+                Face = face
+            };
             Cards.Add(card);
         }
     }

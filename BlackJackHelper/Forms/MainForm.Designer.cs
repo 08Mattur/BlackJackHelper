@@ -42,6 +42,15 @@
             this.lblPlayerValueText = new System.Windows.Forms.Label();
             this.lblWhatDo = new System.Windows.Forms.Label();
             this.gbDeck = new System.Windows.Forms.GroupBox();
+            this.lblAProbability = new System.Windows.Forms.Label();
+            this.lbl2Probability = new System.Windows.Forms.Label();
+            this.lbl3Probability = new System.Windows.Forms.Label();
+            this.lbl4Probability = new System.Windows.Forms.Label();
+            this.lbl5Probability = new System.Windows.Forms.Label();
+            this.lbl6Probability = new System.Windows.Forms.Label();
+            this.lbl7Probability = new System.Windows.Forms.Label();
+            this.lbl8Probability = new System.Windows.Forms.Label();
+            this.lbl9Probability = new System.Windows.Forms.Label();
             this.lbl10Probability = new System.Windows.Forms.Label();
             this.lbl10InDeck = new System.Windows.Forms.Label();
             this.lbl9InDeck = new System.Windows.Forms.Label();
@@ -67,15 +76,6 @@
             this.btn3Count = new System.Windows.Forms.Button();
             this.btn2Count = new System.Windows.Forms.Button();
             this.btnACount = new System.Windows.Forms.Button();
-            this.lbl9Probability = new System.Windows.Forms.Label();
-            this.lbl8Probability = new System.Windows.Forms.Label();
-            this.lbl7Probability = new System.Windows.Forms.Label();
-            this.lbl6Probability = new System.Windows.Forms.Label();
-            this.lbl5Probability = new System.Windows.Forms.Label();
-            this.lbl4Probability = new System.Windows.Forms.Label();
-            this.lbl3Probability = new System.Windows.Forms.Label();
-            this.lbl2Probability = new System.Windows.Forms.Label();
-            this.lblAProbability = new System.Windows.Forms.Label();
             this.gbDealer.SuspendLayout();
             this.gbPlayer.SuspendLayout();
             this.gbDeck.SuspendLayout();
@@ -198,7 +198,7 @@
             // 
             this.lblWhatDo.AutoSize = true;
             this.lblWhatDo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblWhatDo.Location = new System.Drawing.Point(291, 250);
+            this.lblWhatDo.Location = new System.Drawing.Point(293, 386);
             this.lblWhatDo.Name = "lblWhatDo";
             this.lblWhatDo.Size = new System.Drawing.Size(0, 25);
             this.lblWhatDo.TabIndex = 9;
@@ -246,12 +246,84 @@
             this.gbDeck.TabStop = false;
             this.gbDeck.Text = "Deck";
             // 
+            // lblAProbability
+            // 
+            this.lblAProbability.AutoSize = true;
+            this.lblAProbability.Location = new System.Drawing.Point(149, 84);
+            this.lblAProbability.Name = "lblAProbability";
+            this.lblAProbability.Size = new System.Drawing.Size(0, 15);
+            this.lblAProbability.TabIndex = 33;
+            // 
+            // lbl2Probability
+            // 
+            this.lbl2Probability.AutoSize = true;
+            this.lbl2Probability.Location = new System.Drawing.Point(195, 84);
+            this.lbl2Probability.Name = "lbl2Probability";
+            this.lbl2Probability.Size = new System.Drawing.Size(0, 15);
+            this.lbl2Probability.TabIndex = 32;
+            // 
+            // lbl3Probability
+            // 
+            this.lbl3Probability.AutoSize = true;
+            this.lbl3Probability.Location = new System.Drawing.Point(241, 84);
+            this.lbl3Probability.Name = "lbl3Probability";
+            this.lbl3Probability.Size = new System.Drawing.Size(0, 15);
+            this.lbl3Probability.TabIndex = 31;
+            // 
+            // lbl4Probability
+            // 
+            this.lbl4Probability.AutoSize = true;
+            this.lbl4Probability.Location = new System.Drawing.Point(287, 84);
+            this.lbl4Probability.Name = "lbl4Probability";
+            this.lbl4Probability.Size = new System.Drawing.Size(0, 15);
+            this.lbl4Probability.TabIndex = 30;
+            // 
+            // lbl5Probability
+            // 
+            this.lbl5Probability.AutoSize = true;
+            this.lbl5Probability.Location = new System.Drawing.Point(333, 84);
+            this.lbl5Probability.Name = "lbl5Probability";
+            this.lbl5Probability.Size = new System.Drawing.Size(0, 15);
+            this.lbl5Probability.TabIndex = 29;
+            // 
+            // lbl6Probability
+            // 
+            this.lbl6Probability.AutoSize = true;
+            this.lbl6Probability.Location = new System.Drawing.Point(382, 84);
+            this.lbl6Probability.Name = "lbl6Probability";
+            this.lbl6Probability.Size = new System.Drawing.Size(0, 15);
+            this.lbl6Probability.TabIndex = 28;
+            // 
+            // lbl7Probability
+            // 
+            this.lbl7Probability.AutoSize = true;
+            this.lbl7Probability.Location = new System.Drawing.Point(428, 84);
+            this.lbl7Probability.Name = "lbl7Probability";
+            this.lbl7Probability.Size = new System.Drawing.Size(0, 15);
+            this.lbl7Probability.TabIndex = 27;
+            // 
+            // lbl8Probability
+            // 
+            this.lbl8Probability.AutoSize = true;
+            this.lbl8Probability.Location = new System.Drawing.Point(474, 84);
+            this.lbl8Probability.Name = "lbl8Probability";
+            this.lbl8Probability.Size = new System.Drawing.Size(0, 15);
+            this.lbl8Probability.TabIndex = 26;
+            // 
+            // lbl9Probability
+            // 
+            this.lbl9Probability.AutoSize = true;
+            this.lbl9Probability.Location = new System.Drawing.Point(520, 84);
+            this.lbl9Probability.Name = "lbl9Probability";
+            this.lbl9Probability.Size = new System.Drawing.Size(0, 15);
+            this.lbl9Probability.TabIndex = 25;
+            // 
             // lbl10Probability
             // 
             this.lbl10Probability.AutoSize = true;
             this.lbl10Probability.Location = new System.Drawing.Point(566, 84);
             this.lbl10Probability.Name = "lbl10Probability";
-            this.lbl10Probability.Size = new System.Drawing.Size(13, 15);
+            this.lbl10Probability.Size = new System.Drawing.Size(0, 15);
             this.lbl10Probability.TabIndex = 24;
             // 
             // lbl10InDeck
@@ -468,78 +540,6 @@
             this.btnACount.TabIndex = 0;
             this.btnACount.Text = "A";
             this.btnACount.UseVisualStyleBackColor = true;
-            // 
-            // lbl9Probability
-            // 
-            this.lbl9Probability.AutoSize = true;
-            this.lbl9Probability.Location = new System.Drawing.Point(520, 84);
-            this.lbl9Probability.Name = "lbl9Probability";
-            this.lbl9Probability.Size = new System.Drawing.Size(13, 15);
-            this.lbl9Probability.TabIndex = 25;
-            // 
-            // lbl8Probability
-            // 
-            this.lbl8Probability.AutoSize = true;
-            this.lbl8Probability.Location = new System.Drawing.Point(474, 84);
-            this.lbl8Probability.Name = "lbl8Probability";
-            this.lbl8Probability.Size = new System.Drawing.Size(13, 15);
-            this.lbl8Probability.TabIndex = 26;
-            // 
-            // lbl7Probability
-            // 
-            this.lbl7Probability.AutoSize = true;
-            this.lbl7Probability.Location = new System.Drawing.Point(428, 84);
-            this.lbl7Probability.Name = "lbl7Probability";
-            this.lbl7Probability.Size = new System.Drawing.Size(13, 15);
-            this.lbl7Probability.TabIndex = 27;
-            // 
-            // lbl6Probability
-            // 
-            this.lbl6Probability.AutoSize = true;
-            this.lbl6Probability.Location = new System.Drawing.Point(382, 84);
-            this.lbl6Probability.Name = "lbl6Probability";
-            this.lbl6Probability.Size = new System.Drawing.Size(13, 15);
-            this.lbl6Probability.TabIndex = 28;
-            // 
-            // lbl5Probability
-            // 
-            this.lbl5Probability.AutoSize = true;
-            this.lbl5Probability.Location = new System.Drawing.Point(333, 84);
-            this.lbl5Probability.Name = "lbl5Probability";
-            this.lbl5Probability.Size = new System.Drawing.Size(13, 15);
-            this.lbl5Probability.TabIndex = 29;
-            // 
-            // lbl4Probability
-            // 
-            this.lbl4Probability.AutoSize = true;
-            this.lbl4Probability.Location = new System.Drawing.Point(287, 84);
-            this.lbl4Probability.Name = "lbl4Probability";
-            this.lbl4Probability.Size = new System.Drawing.Size(13, 15);
-            this.lbl4Probability.TabIndex = 30;
-            // 
-            // lbl3Probability
-            // 
-            this.lbl3Probability.AutoSize = true;
-            this.lbl3Probability.Location = new System.Drawing.Point(241, 84);
-            this.lbl3Probability.Name = "lbl3Probability";
-            this.lbl3Probability.Size = new System.Drawing.Size(13, 15);
-            this.lbl3Probability.TabIndex = 31;
-            // 
-            // lbl2Probability
-            // 
-            this.lbl2Probability.AutoSize = true;
-            this.lbl2Probability.Location = new System.Drawing.Point(195, 84);
-            this.lbl2Probability.Name = "lbl2Probability";
-            this.lbl2Probability.Size = new System.Drawing.Size(13, 15);
-            this.lbl2Probability.TabIndex = 32;
-            // 
-            // lblAProbability
-            // 
-            this.lblAProbability.AutoSize = true;
-            this.lblAProbability.Location = new System.Drawing.Point(149, 84);
-            this.lblAProbability.Name = "lblAProbability";
-            this.lblAProbability.Size = new System.Drawing.Size(13, 15);
-            this.lblAProbability.TabIndex = 33;
             // 
             // MainForm
             // 
