@@ -5,6 +5,6 @@ namespace BlackJackHelper.Logic.Interfaces
 {
     public  interface IStrategy
     {
-        public ResultAction WhatShouldPlayerDo(Hand playerHand, Face dealerUpcard)
+        public ResultAction WhatShouldPlayerDo(Hand playerHand, Face dealerUpcard);
     }
 }
