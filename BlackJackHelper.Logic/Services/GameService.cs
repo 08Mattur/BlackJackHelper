@@ -1,5 +1,6 @@
 ﻿using BlackJackHelper.Logic.Engines;
 using BlackJackHelper.Logic.Enums;
+using BlackJackHelper.Logic.Interfaces;
 using BlackJackHelper.Logic.Objects;
 
 namespace BlackJackHelper.Logic.Services
@@ -12,10 +13,10 @@ namespace BlackJackHelper.Logic.Services
         private Hand _playerHand;
         private Hand _dealerHand;
 
-        public GameService()
+        public GameService(IStrategy strategy)
         {
             _dealerEngine = new DealerEngine();
-            _playerEngine = new PlayerEngine();
+            _playerEngine = new PlayerEngine(strategy);
             _gameDeck = new Deck();
             _playerHand = new Hand();
             _dealerHand = new Hand();
@@ -35,7 +36,7 @@ namespace BlackJackHelper.Logic.Services
         {
             if (_dealerHand.Cards.Count > 0)
             {
-                return _playerEngine.WhatDo(_playerHand, _dealerHand);
+                return _playerEngine.WhatDo(_playerHand, _dealerHand.Cards[0].Face);
             }
             return ResultAction.Incalculable;
         }

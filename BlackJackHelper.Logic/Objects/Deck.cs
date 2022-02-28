@@ -42,7 +42,9 @@ namespace BlackJackHelper.Logic.Objects
         public double TotalAdvantage { 
             get
             {
-                return Math.Round(PlayerAdvantage / (double)_decks, 2);
+                var decksLeft = Math.Round(Cards.Count / (double)52);
+
+                return Math.Round(PlayerAdvantage / decksLeft, 2);
             } 
         }
 

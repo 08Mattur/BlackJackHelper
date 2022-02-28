@@ -8,12 +8,13 @@ namespace BlackJackHelper.Forms
     public partial class MainForm : Form
     {
         private GameService _gameService { get; set; }
+        private StrategyService _strategyService { get; set; }
 
         public MainForm()
         {
             InitializeComponent();
-            _gameService = new GameService();
-
+            _strategyService = new StrategyService();            
+            _gameService = new GameService(_strategyService.GetStrategy());
             BindSuits();
         }
 
