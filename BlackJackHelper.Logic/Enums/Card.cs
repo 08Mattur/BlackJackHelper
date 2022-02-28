@@ -1,6 +1,6 @@
 ﻿namespace BlackJackHelper.Logic.Enums
 {
-    public enum Face
+    public enum Card
     {
         Ace,
         Two,

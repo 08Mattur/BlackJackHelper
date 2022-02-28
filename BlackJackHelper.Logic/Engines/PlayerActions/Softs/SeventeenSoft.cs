@@ -4,17 +4,17 @@ namespace BlackJackHelper.Logic.Engines.PlayerActions.Softs
 {
     internal static class SeventeenSoft
     {
-        internal static ResultAction WhatDo(Face dealerFace)
+        internal static ResultAction WhatDo(Card dealerFace)
         {
             switch (dealerFace)
             {
-                case Face.Three:
+                case Card.Three:
                     return ResultAction.DoubleOrHit;
-                case Face.Four:
+                case Card.Four:
                     return ResultAction.DoubleOrHit;
-                case Face.Five:
+                case Card.Five:
                     return ResultAction.DoubleOrHit;
-                case Face.Six:
+                case Card.Six:
                     return ResultAction.DoubleOrHit;
                 default:
                     return ResultAction.Hit;

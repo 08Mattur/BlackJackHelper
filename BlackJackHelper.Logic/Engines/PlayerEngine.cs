@@ -10,46 +10,49 @@ namespace BlackJackHelper.Logic.Engines
     {
         private int _playerHandValue = 0;
 
-        private Face _dealerFace;
+        private Card _dealerFace;
 
-        public ResultAction WhatDo(Hand playerHand, Hand dealerHand)
+        public ResultAction WhatDo(PlayerHand playerHand, DealerHand dealerHand)
         {
-            _playerHandValue = playerHand.Value;
-            _dealerFace = dealerHand.Cards[0].Face;
-
-            if (playerHand.IsPair)
+            if (playerHand.Cards.Count > 0 && dealerHand.Cards.Count > 0)
             {
-                var firstCard = playerHand.Cards[0];
-                return WhatDoIfPair(firstCard);
-            }
+                _playerHandValue = playerHand.Value;
+                _dealerFace = dealerHand.Upcard;
 
-            if (playerHand.IsSoft)
-            {
-                return WhatDoIfSoftValue();
-            }
+                if (playerHand.IsPair)
+                {
+                    var firstCard = playerHand.Cards[0];
+                    return WhatDoIfPair(firstCard);
+                }
 
-            return WhatDoIfHardValue();
+                if (playerHand.IsSoft)
+                {
+                    return WhatDoIfSoftValue();
+                }
+
+                return WhatDoIfHardValue();
+            }
+            return ResultAction.Incalculable;
         }
-
         private ResultAction WhatDoIfPair(Card firstCard)
         {
-            switch (firstCard.Face)
+            switch (firstCard)
             {
-                case Face.Two:
+                case Card.Two:
                     return TwoAndThreeSplits.WhatDo(_dealerFace);
-                case Face.Three:
+                case Card.Three:
                     return TwoAndThreeSplits.WhatDo(_dealerFace);
-                case Face.Four:
+                case Card.Four:
                     return ResultAction.Hit;
-                case Face.Six:
+                case Card.Six:
                     return SixSplits.WhatDo(_dealerFace);
-                case Face.Seven:
+                case Card.Seven:
                     return SevenSplits.WhatDo(_dealerFace);
-                case Face.Eight:
+                case Card.Eight:
                     return ResultAction.Split;
-                case Face.Nine:
+                case Card.Nine:
                     return NineSplits.WhatDo(_dealerFace);
-                case Face.Ace:
+                case Card.Ace:
                     return ResultAction.Split;
                 default:
                     return WhatDoIfHardValue();
@@ -59,7 +62,7 @@ namespace BlackJackHelper.Logic.Engines
         {
             switch (_playerHandValue)
             {
-                case >= 21:
+                case > 21:
                     return ResultAction.Bust;
                 case >= 17:
                     return ResultAction.Stand;

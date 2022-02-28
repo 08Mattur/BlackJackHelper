@@ -76,14 +76,18 @@
             this.btn3Count = new System.Windows.Forms.Button();
             this.btn2Count = new System.Windows.Forms.Button();
             this.btnACount = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.simulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbDealer.SuspendLayout();
             this.gbPlayer.SuspendLayout();
             this.gbDeck.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnNewDeck
             // 
-            this.btnNewDeck.Location = new System.Drawing.Point(12, 388);
+            this.btnNewDeck.Location = new System.Drawing.Point(12, 419);
             this.btnNewDeck.Name = "btnNewDeck";
             this.btnNewDeck.Size = new System.Drawing.Size(75, 23);
             this.btnNewDeck.TabIndex = 0;
@@ -93,7 +97,7 @@
             // 
             // btnNewHand
             // 
-            this.btnNewHand.Location = new System.Drawing.Point(843, 388);
+            this.btnNewHand.Location = new System.Drawing.Point(843, 419);
             this.btnNewHand.Name = "btnNewHand";
             this.btnNewHand.Size = new System.Drawing.Size(75, 23);
             this.btnNewHand.TabIndex = 1;
@@ -105,7 +109,7 @@
             // 
             this.gbDealer.Controls.Add(this.ucDealerSuitClubs);
             this.gbDealer.Controls.Add(this.lstDealerHand);
-            this.gbDealer.Location = new System.Drawing.Point(12, 12);
+            this.gbDealer.Location = new System.Drawing.Point(12, 38);
             this.gbDealer.Name = "gbDealer";
             this.gbDealer.Size = new System.Drawing.Size(906, 97);
             this.gbDealer.TabIndex = 7;
@@ -136,7 +140,7 @@
             this.gbPlayer.Controls.Add(this.lstPlayerHand);
             this.gbPlayer.Controls.Add(this.lblPlayerValue);
             this.gbPlayer.Controls.Add(this.lblPlayerValueText);
-            this.gbPlayer.Location = new System.Drawing.Point(12, 115);
+            this.gbPlayer.Location = new System.Drawing.Point(12, 141);
             this.gbPlayer.Name = "gbPlayer";
             this.gbPlayer.Size = new System.Drawing.Size(906, 129);
             this.gbPlayer.TabIndex = 8;
@@ -198,7 +202,7 @@
             // 
             this.lblWhatDo.AutoSize = true;
             this.lblWhatDo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblWhatDo.Location = new System.Drawing.Point(293, 386);
+            this.lblWhatDo.Location = new System.Drawing.Point(339, 419);
             this.lblWhatDo.Name = "lblWhatDo";
             this.lblWhatDo.Size = new System.Drawing.Size(0, 25);
             this.lblWhatDo.TabIndex = 9;
@@ -239,7 +243,7 @@
             this.gbDeck.Controls.Add(this.btn3Count);
             this.gbDeck.Controls.Add(this.btn2Count);
             this.gbDeck.Controls.Add(this.btnACount);
-            this.gbDeck.Location = new System.Drawing.Point(12, 250);
+            this.gbDeck.Location = new System.Drawing.Point(12, 276);
             this.gbDeck.Name = "gbDeck";
             this.gbDeck.Size = new System.Drawing.Size(900, 132);
             this.gbDeck.TabIndex = 10;
@@ -541,18 +545,45 @@
             this.btnACount.Text = "A";
             this.btnACount.UseVisualStyleBackColor = true;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.simulationToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(930, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // simulationToolStripMenuItem
+            // 
+            this.simulationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem});
+            this.simulationToolStripMenuItem.Name = "simulationToolStripMenuItem";
+            this.simulationToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.simulationToolStripMenuItem.Text = "Simulation";
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 423);
+            this.ClientSize = new System.Drawing.Size(930, 454);
             this.Controls.Add(this.gbDeck);
             this.Controls.Add(this.lblWhatDo);
             this.Controls.Add(this.gbPlayer);
             this.Controls.Add(this.gbDealer);
             this.Controls.Add(this.btnNewHand);
             this.Controls.Add(this.btnNewDeck);
+            this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
@@ -561,6 +592,8 @@
             this.gbPlayer.PerformLayout();
             this.gbDeck.ResumeLayout(false);
             this.gbDeck.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -616,5 +649,8 @@
         private Label lbl7Probability;
         private Label lbl8Probability;
         private Label lbl9Probability;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem simulationToolStripMenuItem;
+        private ToolStripMenuItem newToolStripMenuItem;
     }
 }

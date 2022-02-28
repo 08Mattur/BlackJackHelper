@@ -18,72 +18,72 @@
  
         private void btnAddAce_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Ace);
+            AddCard(Logic.Enums.Card.Ace);
         }
 
         private void btnAddTwo_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Two);
+            AddCard(Logic.Enums.Card.Two);
         }
 
         private void btnAddThree_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Three);
+            AddCard(Logic.Enums.Card.Three);
         }
 
         private void btnAddFour_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Four);
+            AddCard(Logic.Enums.Card.Four);
         }
 
         private void btnAddFive_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Five);
+            AddCard(Logic.Enums.Card.Five);
         }
 
         private void btnAddSix_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Six);
+            AddCard(Logic.Enums.Card.Six);
         }
 
         private void btnAddSeven_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Seven);
+            AddCard(Logic.Enums.Card.Seven);
         }
 
         private void btnAddEight_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Eight);
+            AddCard(Logic.Enums.Card.Eight);
         }
 
         private void btnAddNine_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Nine);
+            AddCard(Logic.Enums.Card.Nine);
         }
 
         private void btnAddTen_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Ten);
+            AddCard(Logic.Enums.Card.Ten);
         }
 
         private void btnAddJack_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Jack);
+            AddCard(Logic.Enums.Card.Jack);
         }
 
         private void btnAddQueen_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.Queen);
+            AddCard(Logic.Enums.Card.Queen);
         }
 
         private void btnAddKing_Click(object sender, EventArgs e)
         {
-            AddCard(Logic.Enums.Face.King);
+            AddCard(Logic.Enums.Card.King);
         }
 
-        private void AddCard(Logic.Enums.Face face)
+        private void AddCard(Logic.Enums.Card card)
         {
-            _mainForm.AddCard(face, _isDealer);
+            _mainForm.AddCard(card, _isDealer);
         }
     }
 }

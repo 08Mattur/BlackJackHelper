@@ -1,24 +1,21 @@
-﻿using BlackJackHelper.Logic.Objects;
+﻿using BlackJackHelper.Logic.Enums;
+using BlackJackHelper.Logic.Objects;
 
 namespace BlackJackHelper.Logic.Engines
 {
     public class DealerEngine
     {
-        public bool ShouldHit(Hand hand)
+        public ResultAction WhatShouldDealerDo(DealerHand hand)
         {
-            if (IsAbove17(hand))
+            if (hand.Value > 21)
             {
-                return false;
+                return ResultAction.Bust;
             }
-            return true;
-        }
-
-        private bool IsAbove17(Hand hand)
-        {
-            if (hand.Value >= 17){
-                return true;
+            if (hand.Value >= 17)
+            {
+                return ResultAction.Stand;
             }
-            return false;
+            return ResultAction.Hit;
         }
     }
 }

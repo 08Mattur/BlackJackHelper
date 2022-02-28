@@ -4,19 +4,19 @@ namespace BlackJackHelper.Logic.Engines.PlayerActions.Hards
 {
     internal static class TenHard
     {
-        internal static ResultAction WhatDo(Face dealerFace)
+        internal static ResultAction WhatDo(Card dealerFace)
         {
             switch (dealerFace)
             {
-                case Face.Ten:
+                case Card.Ten:
                     return ResultAction.Hit;
-                case Face.Jack:
+                case Card.Jack:
                     return ResultAction.Hit;
-                case Face.Queen:
+                case Card.Queen:
                     return ResultAction.Hit;
-                case Face.King:
+                case Card.King:
                     return ResultAction.Hit;
-                case Face.Ace:
+                case Card.Ace:
                     return ResultAction.Hit;
                 default:
                     return ResultAction.DoubleOrHit;

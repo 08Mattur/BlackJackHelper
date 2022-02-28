@@ -5,13 +5,12 @@ namespace BlackJackHelper.Logic.Objects
     public class Deck
     {
         private int _decks;
-        
+
         public Deck()
         {
             Cards = new List<Card>();
             PlayerAdvantage = 0;
         }
-
         public Deck(int deckCount)
         {
             Cards = new List<Card>();
@@ -20,35 +19,30 @@ namespace BlackJackHelper.Logic.Objects
 
             for (int i = 0; i < _decks; i++)
             {
-                foreach (int j in Enum.GetValues(typeof(Face)))
+                foreach (int j in Enum.GetValues(typeof(Card)))
                 {
-                    var face = (Face)j;
+                    var card = (Card)j;
 
                     for (int x = 0; x < 4; x++)
                     {
-                        Cards.Add(new Card()
-                        {
-                            Face = face
-                        });
+                        Cards.Add(card);
                     }
                 }
-            }            
+            }
         }
-
         public List<Card> Cards { get; set; }
-
         public int PlayerAdvantage { get; set; }
-
-        public double TotalAdvantage { 
+        public decimal TotalAdvantage
+        {
             get
             {
-                return Math.Round(PlayerAdvantage / (double)_decks, 2);
-            } 
+                var decksLeft = (decimal)Cards.Count / 52;
+                return Math.Ceiling(PlayerAdvantage / decksLeft);
+            }
         }
-
-        public int GetCountInDeck(Face face)
+        public int GetCountInDeck(Card face)
         {
-            if (face == Face.Ten)
+            if (face == Card.Ten)
             {
                 return GetTensInDeck();
             }
@@ -56,19 +50,18 @@ namespace BlackJackHelper.Logic.Objects
             var counter = 0;
             foreach (var card in Cards)
             {
-                if (card.Face == face)
+                if (card == face)
                 {
                     counter++;
                 }
             }
             return counter;
         }
-
-        public void RemoveFromDeck(Face face)
+        public void RemoveFromDeck(Card face)
         {
             foreach (Card card in Cards)
             {
-                if (card.Face == face)
+                if (card == face)
                 {
                     Cards.Remove(card);
                     break;
@@ -76,46 +69,45 @@ namespace BlackJackHelper.Logic.Objects
             }
             UpdateCounter(face);
         }
-
         private int GetTensInDeck()
         {
             var counter = 0;
             foreach (var card in Cards)
             {
-                if (card.Face == Face.Ten ||
-                    card.Face == Face.Jack ||
-                    card.Face == Face.Queen ||
-                    card.Face == Face.King)
+                if (card == Card.Ten ||
+                    card == Card.Jack ||
+                    card == Card.Queen ||
+                    card == Card.King)
                 {
                     counter++;
                 }
             }
             return counter;
         }
-        private void UpdateCounter(Face face)
+        private void UpdateCounter(Card face)
         {
             switch (face)
             {
-                case Face.Two:
+                case Card.Two:
                     PlayerAdvantage += 1;
                     break;
-                case Face.Three:
+                case Card.Three:
                     PlayerAdvantage += 1;
                     break;
-                case Face.Four:
+                case Card.Four:
                     PlayerAdvantage += 1;
                     break;
-                case Face.Five:
+                case Card.Five:
                     PlayerAdvantage += 1;
                     break;
-                case Face.Six:
+                case Card.Six:
                     PlayerAdvantage += 1;
                     break;
-                case Face.Seven:
+                case Card.Seven:
                     break;
-                case Face.Eight:
+                case Card.Eight:
                     break;
-                case Face.Nine:
+                case Card.Nine:
                     break;
                 default:
                     PlayerAdvantage -= 1;

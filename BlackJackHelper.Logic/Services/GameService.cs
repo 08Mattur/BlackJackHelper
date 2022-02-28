@@ -6,80 +6,82 @@ namespace BlackJackHelper.Logic.Services
 {
     public class GameService
     {
-        private DealerEngine _dealerEngine;
-        private PlayerEngine _playerEngine;
-        private Deck _gameDeck;
-        private Hand _playerHand;
-        private Hand _dealerHand;
+        private Game _game;
 
         public GameService()
         {
-            _dealerEngine = new DealerEngine();
-            _playerEngine = new PlayerEngine();
-            _gameDeck = new Deck();
-            _playerHand = new Hand();
-            _dealerHand = new Hand();
-
-            NewDeck(8);
+            _game = new Game();
         }
 
         public int PlayerValue
         {
             get
             {
-                return _playerHand.Value;
+                return _game.PlayerValue;
             }
         }
-
-        public ResultAction WhatShouldPlayerDo()
-        {
-            if (_dealerHand.Cards.Count > 0)
-            {
-                return _playerEngine.WhatDo(_playerHand, _dealerHand);
-            }
-            return ResultAction.Incalculable;
-        }
-
-        public double PlayerTotalAdvantage
+        public int DealerValue
         {
             get
             {
-                return _gameDeck.TotalAdvantage;
+                return _game.DealerValue;
             }
         }
 
-        public double TotalCardsInDeck()
+        public bool IsPlayerBlackJack()
         {
-            return _gameDeck.Cards.Count();
+            return _game.IsPlayerBlackJack();
         }
-        public int GetCountInDeck(Face face)
+        public bool IsDealerBlackJack()
         {
-            return _gameDeck.GetCountInDeck(face);
+            return _game.IsDealerBlackJack();
         }
-
+        public decimal PlayerTotalAdvantage
+        {
+            get
+            {
+                return _game.PlayerTotalAdvantage;
+            }
+        }
+        public int TotalCardsInDeck()
+        {
+            return _game.CardsLeftInDeck;
+        }
+        public int GetCountInDeck(Card face)
+        {
+            return _game.GetCountOfCardInDeck(face);
+        }
         public void NewDeck(int intDecks)
         {
-            _gameDeck = DeckService.BuildNewDeck(intDecks);
-            NewHand();
+            _game.ShuffleDeck();
         }
-
-        public void NewHand()
+        public void NewRound()
         {
-            _dealerHand = new Hand();
-            _playerHand = new Hand();
+            _game.NewRound();
         }
-
-        public void DrawCard(Face face, bool isDealer)
-        {
-            _gameDeck.RemoveFromDeck(face);
-
+        public void DrawCard(Card card, bool isDealer)
+        {         
             if (isDealer)
             {
-                _dealerHand.AddCard(face);
+                _game.DealerDrawCard(card);
             }
             else
             {
-                _playerHand.AddCard(face);
+                _game.PlayerDrawCard(card);
+            }
+        }
+        public PlayerHand PlayerHand
+        {
+            get
+            {
+                return _game.PlayerHand;
+            }
+        }
+        public DealerHand DealerHand
+        {
+            get
+            {
+                return _game.DealerHand;
             }
         }
     }

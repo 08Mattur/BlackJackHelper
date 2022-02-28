@@ -4,17 +4,17 @@ namespace BlackJackHelper.Logic.Engines.PlayerActions.Splits
 {
     internal static class SixSplits
     {
-        internal static ResultAction WhatDo(Face dealerFace)
+        internal static ResultAction WhatDo(Card dealerFace)
         {
             switch (dealerFace)
             {
-                case Face.Three:
+                case Card.Three:
                     return ResultAction.Split;
-                case Face.Four:
+                case Card.Four:
                     return ResultAction.Split;
-                case Face.Five:
+                case Card.Five:
                     return ResultAction.Split;
-                case Face.Six:
+                case Card.Six:
                     return ResultAction.Split;
                 default:
                     return ResultAction.Hit;

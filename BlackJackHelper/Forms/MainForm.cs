@@ -8,11 +8,13 @@ namespace BlackJackHelper.Forms
     public partial class MainForm : Form
     {
         private GameService _gameService { get; set; }
+        private EngineService _engineService { get; set; }
 
         public MainForm()
         {
             InitializeComponent();
             _gameService = new GameService();
+            _engineService = new EngineService();
 
             BindSuits();
         }
@@ -22,13 +24,23 @@ namespace BlackJackHelper.Forms
             ucDealerSuitClubs.SetProperties(this, true);
             ucPlayerSuitClubs.SetProperties(this, false);
         }
-
-        private void AddDealerCard(Face face)
+        private void AddDealerCard(Card face)
         {
             _gameService.DrawCard(face, true);
             lstDealerHand.Items.Add(Enum.GetName(face));
-
-            FormatSuggestionMessage(_gameService.WhatShouldPlayerDo());
+        }
+        private void AddPlayercard(Card face)
+        {
+            _gameService.DrawCard(face, false);
+            lstPlayerHand.Items.Add(Enum.GetName(face));
+        }
+        
+        private void UpdateLabelsText()
+        {
+            lblAdvantageValue.Text = _gameService.PlayerTotalAdvantage.ToString();
+            lblPlayerValue.Text = _gameService.PlayerValue.ToString();
+            
+            FormatSuggestionMessage(_engineService.WhatShouldPlayerDo(_gameService.PlayerHand, _gameService.DealerHand));
         }
         private void FormatSuggestionMessage(ResultAction playerSuggestedAction)
         {
@@ -67,20 +79,9 @@ namespace BlackJackHelper.Forms
                     break;
             }
         }
-        private void AddPlayercard(Face face)
-        {
-            _gameService.DrawCard(face, false);
-            lstPlayerHand.Items.Add(Enum.GetName(face));
-        }
-        private void UpdateLabelsText()
-        {
-            lblAdvantageValue.Text = _gameService.PlayerTotalAdvantage.ToString();
-            lblPlayerValue.Text = _gameService.PlayerValue.ToString();
-            FormatSuggestionMessage(_gameService.WhatShouldPlayerDo());
-        }
         private void NewHand()
         {
-            _gameService.NewHand();
+            _gameService.NewRound();
 
             ClearOptions();
 
@@ -97,19 +98,19 @@ namespace BlackJackHelper.Forms
         }
         private void CalculateCardsLeft()
         {
-            var totalCount = _gameService.TotalCardsInDeck();
+            var totalCount = (double)_gameService.TotalCardsInDeck();
             lblTotalInDeckValue.Text = totalCount.ToString();
 
-            var acesCount = _gameService.GetCountInDeck(Face.Ace);
-            var twosCount = _gameService.GetCountInDeck(Face.Two);
-            var threesCount = _gameService.GetCountInDeck(Face.Three);
-            var foursCount = _gameService.GetCountInDeck(Face.Four);
-            var fivesCount = _gameService.GetCountInDeck(Face.Five);
-            var sixesCount = _gameService.GetCountInDeck(Face.Six);
-            var sevensCount = _gameService.GetCountInDeck(Face.Seven);
-            var eightsCount = _gameService.GetCountInDeck(Face.Eight);
-            var ninesCount = _gameService.GetCountInDeck(Face.Nine);
-            var tensCount = _gameService.GetCountInDeck(Face.Ten);
+            var acesCount = _gameService.GetCountInDeck(Card.Ace);
+            var twosCount = _gameService.GetCountInDeck(Card.Two);
+            var threesCount = _gameService.GetCountInDeck(Card.Three);
+            var foursCount = _gameService.GetCountInDeck(Card.Four);
+            var fivesCount = _gameService.GetCountInDeck(Card.Five);
+            var sixesCount = _gameService.GetCountInDeck(Card.Six);
+            var sevensCount = _gameService.GetCountInDeck(Card.Seven);
+            var eightsCount = _gameService.GetCountInDeck(Card.Eight);
+            var ninesCount = _gameService.GetCountInDeck(Card.Nine);
+            var tensCount = _gameService.GetCountInDeck(Card.Ten);
 
             lblAInDeck.Text = acesCount.ToString();
             lbl2InDeck.Text = twosCount.ToString();
@@ -138,7 +139,7 @@ namespace BlackJackHelper.Forms
             lstDealerHand.Items.Clear();
             lstPlayerHand.Items.Clear();
         }
-        public void AddCard(Face face, bool isDealer)
+        public void AddCard(Card face, bool isDealer)
         {
             if (isDealer)
             {
@@ -165,64 +166,64 @@ namespace BlackJackHelper.Forms
             switch (key)
             {
                 case Keys.NumPad0: 
-                    AddCard(Face.Ten, false);
+                    AddCard(Card.Ten, false);
                     break;
                 case Keys.NumPad1:
-                    AddCard(Face.Ace, false);
+                    AddCard(Card.Ace, false);
                     break;
                 case Keys.NumPad2:
-                    AddCard(Face.Two, false);
+                    AddCard(Card.Two, false);
                     break;
                 case Keys.NumPad3:
-                    AddCard(Face.Three, false);
+                    AddCard(Card.Three, false);
                     break;
                 case Keys.NumPad4:
-                    AddCard(Face.Four, false);
+                    AddCard(Card.Four, false);
                     break;
                 case Keys.NumPad5:
-                    AddCard(Face.Five, false);
+                    AddCard(Card.Five, false);
                     break;
                 case Keys.NumPad6:
-                    AddCard(Face.Six, false);
+                    AddCard(Card.Six, false);
                     break;
                 case Keys.NumPad7:
-                    AddCard(Face.Seven, false);
+                    AddCard(Card.Seven, false);
                     break;
                 case Keys.NumPad8:
-                    AddCard(Face.Eight, false);
+                    AddCard(Card.Eight, false);
                     break;
                 case Keys.NumPad9:
-                    AddCard(Face.Nine, false);
+                    AddCard(Card.Nine, false);
                     break;
                 case Keys.D0:
-                    AddCard(Face.Ten, true);
+                    AddCard(Card.Ten, true);
                     break;
                 case Keys.D1:
-                    AddCard(Face.Ace, true);
+                    AddCard(Card.Ace, true);
                     break;
                 case Keys.D2:
-                    AddCard(Face.Two, true);
+                    AddCard(Card.Two, true);
                     break;
                 case Keys.D3:
-                    AddCard(Face.Three, true);
+                    AddCard(Card.Three, true);
                     break;
                 case Keys.D4:
-                    AddCard(Face.Four, true);
+                    AddCard(Card.Four, true);
                     break;
                 case Keys.D5:
-                    AddCard(Face.Five, true);
+                    AddCard(Card.Five, true);
                     break;
                 case Keys.D6:
-                    AddCard(Face.Six, true);
+                    AddCard(Card.Six, true);
                     break;
                 case Keys.D7:
-                    AddCard(Face.Seven, true);
+                    AddCard(Card.Seven, true);
                     break;
                 case Keys.D8:
-                    AddCard(Face.Eight, true);
+                    AddCard(Card.Eight, true);
                     break;
                 case Keys.D9:
-                    AddCard(Face.Nine, true);
+                    AddCard(Card.Nine, true);
                     break;
                 case Keys.Back:
                     NewHand();
@@ -236,6 +237,12 @@ namespace BlackJackHelper.Forms
         private void btnNewDeck_Click(object sender, EventArgs e)
         {
             NewDeck();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new SimulationInputForm();
+            form.ShowDialog();
         }
     }
 }
